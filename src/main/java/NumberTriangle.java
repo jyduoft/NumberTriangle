@@ -118,25 +118,49 @@ public class NumberTriangle {
         BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
 
 
-        // TODO define any variables that you want to use to store things
+        // DONETODO define any variables that you want to use to store things
 
         // will need to return the top of the NumberTriangle,
         // so might want a variable for that.
         NumberTriangle top = null;
+        NumberTriangle[] currentArray = null;
+        NumberTriangle[] nextArray = null;
 
         String line = br.readLine();
+        currentArray = stringToNumberTriangleArray(line);
+
         while (line != null) {
 
             // remove when done; this line is included so running starter code prints the contents of the file
             System.out.println(line);
 
-            // TODO process the line
+            // DONETODO process the line
 
             //read the next line
             line = br.readLine();
+            nextArray = stringToNumberTriangleArray(line);
+
+            for (int i=0; i<currentArray.length; i++) {
+                currentArray[i].setLeft(nextArray[i]);
+                currentArray[i].setRight(nextArray[i+1]);
+            };
+
+            currentArray = nextArray;
+            if (currentArray.length == 1){
+                top = currentArray[0];
+            }
         }
         br.close();
         return top;
+    }
+
+    private static NumberTriangle[] stringToNumberTriangleArray(String s) {
+        String[] currentArrayString = s.split(" ");
+        NumberTriangle[] NTArray = new NumberTriangle[currentArrayString.length];
+        for (int i = 0; i < currentArrayString.length; i++) {
+            NTArray[i] = new NumberTriangle(Integer.parseInt(currentArrayString[i]));
+        }
+        return NTArray;
     }
 
     public static void main(String[] args) throws IOException {
