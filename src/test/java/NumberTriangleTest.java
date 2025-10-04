@@ -45,4 +45,11 @@ public class NumberTriangleTest {
         NumberTriangle mt = NumberTriangle.loadTriangle("input_tree.txt");
         assertEquals(4, mt.retrieve("llllllllllllll"));
     }
+
+    @Test
+    public void bigTreeRandom() throws IOException {
+
+        NumberTriangle mt = NumberTriangle.loadTriangle("input_tree.txt");
+        assertEquals(91, mt.retrieve("lrrlrlrlrrll"));
+    }
 }
