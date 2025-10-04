@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.Objects;
 
 /**
  * This is the provided NumberTriangle class to be used in this coding task.
@@ -88,7 +89,7 @@ public class NumberTriangle {
      */
     public int retrieve(String path) {
         // DONETODO implement this method
-        if (path == null) {
+        if (Objects.equals(path, "")) {
             return this.root;
         }
         else if (path.charAt(0) == 'l') {
@@ -132,22 +133,30 @@ public class NumberTriangle {
         while (line != null) {
 
             // remove when done; this line is included so running starter code prints the contents of the file
-            System.out.println(line);
+//            System.out.println(line);
 
             // DONETODO process the line
 
             //read the next line
             line = br.readLine();
-            nextArray = stringToNumberTriangleArray(line);
 
-            for (int i=0; i<currentArray.length; i++) {
-                currentArray[i].setLeft(nextArray[i]);
-                currentArray[i].setRight(nextArray[i+1]);
-            };
+            if (line != null) {
+                nextArray = stringToNumberTriangleArray(line);
 
-            currentArray = nextArray;
-            if (currentArray.length == 1){
-                top = currentArray[0];
+                for (int i = 0; i < currentArray.length; i++) {
+                    currentArray[i].setLeft(nextArray[i]);
+                    currentArray[i].setRight(nextArray[i + 1]);
+                }
+
+                if (currentArray.length == 1) {
+                    top = currentArray[0];
+                }
+
+                currentArray = nextArray;
+            }
+            else{
+                br.close();
+                return top;
             }
         }
         br.close();
